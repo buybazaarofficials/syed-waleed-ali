@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Syed Waleed Ali — Full-Stack Developer & Digital Marketer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:   #0A2342;
+    --blue:   #1B6CA8;
+    --sky:    #4DA6E8;
+    --light:  #EAF2FB;
+    --muted:  #6B8DA8;
+    --white:  #F8FBFF;
+    --dark:   #07182e;
+    --grad:   linear-gradient(135deg, #0A2342 0%, #1B6CA8 100%);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,35,66,.95);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw; height: 64px;
+    border-bottom: 1px solid rgba(77,166,232,.15);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
+    color: var(--white); letter-spacing: -.02em;
+  }
+  .nav-logo span { color: var(--sky); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: #BDD5EA; text-decoration: none; font-size: .875rem; font-weight: 400;
+    transition: color .2s; letter-spacing: .03em;
+  }
+  .nav-links a:hover { color: var(--sky); }
+  .nav-cta {
+    background: var(--blue); color: #fff; border: none; border-radius: 6px;
+    padding: .45rem 1.1rem; font-size: .85rem; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; font-weight: 500; transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--sky); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex; align-items: center;
+    padding: 80px 6vw 0;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(27,108,168,.35) 0%, transparent 70%);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem; width: 100%; position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(77,166,232,.12); border: 1px solid rgba(77,166,232,.3);
+    border-radius: 99px; padding: .3rem .9rem;
+    color: var(--sky); font-size: .78rem; font-weight: 500; letter-spacing: .05em;
+    margin-bottom: 1.4rem; text-transform: uppercase;
+  }
+  .hero-badge::before { content: '●'; font-size: .5rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 4rem); color: #fff;
+    line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1rem;
+  }
+  h1 span { color: var(--sky); }
+  .hero-sub {
+    font-size: 1.05rem; color: #BDD5EA; line-height: 1.7; max-width: 480px;
+    margin-bottom: 2rem; font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: #fff; padding: .75rem 1.8rem;
+    border-radius: 8px; text-decoration: none; font-weight: 500;
+    transition: transform .2s, background .2s; font-size: .95rem;
+  }
+  .btn-primary:hover { background: var(--sky); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: #BDD5EA; border: 1px solid rgba(189,213,234,.3);
+    padding: .75rem 1.8rem; border-radius: 8px; text-decoration: none;
+    font-weight: 400; transition: border-color .2s, color .2s; font-size: .95rem;
+  }
+  .btn-outline:hover { border-color: var(--sky); color: var(--sky); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 2.5rem;
+  }
+  .stat { }
+  .stat-num { font-family: 'Syne',sans-serif; font-size: 2rem; font-weight: 800; color: #fff; }
+  .stat-num span { color: var(--sky); }
+  .stat-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+  /* hero visual */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(77,166,232,.18);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 340px;
+    backdrop-filter: blur(8px);
+    position: relative;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: -1px; left: 30px; right: 30px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sky), transparent);
+  }
+  .card-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.2rem; }
+  .card-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(27,108,168,.3); display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .card-label { color: #BDD5EA; font-size: .82rem; }
+  .card-val { color: #fff; font-size: .95rem; font-weight: 500; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
+  .pill {
+    background: rgba(77,166,232,.12); border: 1px solid rgba(77,166,232,.25);
+    color: var(--sky); border-radius: 99px; padding: .2rem .75rem;
+    font-size: .75rem; font-weight: 500;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 6vw; }
+  .sec-label {
+    font-size: .75rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: .6rem;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.15;
+    margin-bottom: 1rem; letter-spacing: -.02em;
+  }
+  .sec-desc {
+    color: var(--muted); font-size: 1rem; line-height: 1.7;
+    max-width: 560px; font-weight: 300;
+  }
+  .sec-head { margin-bottom: 3.5rem; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--light); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-avatar {
+    width: 280px; height: 280px; border-radius: 50%;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne',sans-serif; font-size: 5rem; font-weight: 800; color: #fff;
+    letter-spacing: -.04em; box-shadow: 0 30px 80px rgba(27,108,168,.3);
+    margin: auto;
+  }
+  .about-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+  .tag {
+    background: #fff; border: 1px solid rgba(27,108,168,.2);
+    border-radius: 6px; padding: .3rem .8rem; font-size: .82rem;
+    color: var(--navy); font-weight: 500;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: #fff; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--light); border-radius: 14px; padding: 1.8rem;
+    border: 1px solid rgba(27,108,168,.1);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,35,66,.1); }
+  .skill-icon { font-size: 2rem; margin-bottom: .8rem; }
+  .skill-card h3 { font-family: 'Syne',sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: .8rem; }
+  .skill-list { list-style: none; }
+  .skill-list li { font-size: .875rem; color: var(--muted); padding: .22rem 0; }
+  .skill-list li::before { content: '→ '; color: var(--blue); }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--navy); }
+  #projects .sec-title { color: #fff; }
+  #projects .sec-label { color: var(--sky); }
+  #projects .sec-desc { color: #BDD5EA; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.5rem; }
+  .project-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(77,166,232,.15);
+    border-radius: 16px; padding: 1.8rem;
+    transition: transform .25s, border-color .25s;
+    cursor: default;
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(77,166,232,.4); }
+  .project-num {
+    font-family: 'Syne',sans-serif; font-size: .75rem; font-weight: 800;
+    color: var(--sky); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .8rem;
+  }
+  .project-card h3 {
+    font-family: 'Syne',sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: #fff; margin-bottom: .6rem;
+  }
+  .project-card p { font-size: .875rem; color: #8EB8D4; line-height: 1.65; margin-bottom: 1rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+  .stack-tag {
+    background: rgba(27,108,168,.2); color: var(--sky); border-radius: 4px;
+    padding: .15rem .55rem; font-size: .72rem; font-weight: 500;
+  }
+  .project-result {
+    background: rgba(77,166,232,.08); border-left: 3px solid var(--sky);
+    border-radius: 0 6px 6px 0; padding: .5rem .75rem;
+    color: var(--sky); font-size: .82rem; font-weight: 500;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: #fff; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.2rem; border-radius: 10px;
+    background: var(--light); border: 1px solid rgba(27,108,168,.1);
+  }
+  .c-icon { font-size: 1.4rem; }
+  .c-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .c-val { font-weight: 500; color: var(--navy); font-size: .95rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input,
+  .contact-form textarea {
+    border: 1px solid rgba(27,108,168,.2); border-radius: 8px;
+    padding: .85rem 1rem; font-family: 'DM Sans', sans-serif; font-size: .9rem;
+    color: var(--navy); background: var(--light); outline: none;
+    transition: border-color .2s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--blue); }
+  .contact-form textarea { resize: vertical; min-height: 130px; }
+  .contact-form button {
+    background: var(--grad); color: #fff; border: none; border-radius: 8px;
+    padding: .9rem; font-size: .95rem; font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: opacity .2s;
+  }
+  .contact-form button:hover { opacity: .88; }
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+    background: var(--blue); color: #fff; padding: 1rem 1.5rem;
+    border-radius: 10px; font-size: .9rem; opacity: 0; pointer-events: none;
+    transition: opacity .3s; box-shadow: 0 8px 30px rgba(27,108,168,.4);
+  }
+  .toast.show { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); color: #8EB8D4;
+    text-align: center; padding: 2rem 6vw; font-size: .82rem;
+  }
+  footer strong { color: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-visual { display: none; }
+    nav .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">W<span>.</span>Ali</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge">Available for Remote Work</div>
+      <h1>Full-Stack Developer<br>&amp; <span>Digital Marketer</span></h1>
+      <p class="hero-sub">I build high-performance websites and run data-driven ad campaigns that turn traffic into revenue. Laravel · WordPress · Shopify · Google Ads · Facebook Ads.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Let's Talk</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">3<span>+</span></div>
+          <div class="stat-label">Years Dev</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4<span>+</span></div>
+          <div class="stat-label">Years Marketing</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">Projects Live</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-row">
+          <div class="card-icon">💻</div>
+          <div><div class="card-label">Current Role</div><div class="card-val">Freelance Dev & Marketer</div></div>
+        </div>
+        <div class="card-row">
+          <div class="card-icon">📍</div>
+          <div><div class="card-label">Location</div><div class="card-val">Karachi, Pakistan</div></div>
+        </div>
+        <div class="card-row">
+          <div class="card-icon">🌐</div>
+          <div><div class="card-label">Availability</div><div class="card-val">Remote — Worldwide</div></div>
+        </div>
+        <div class="card-row">
+          <div class="card-icon">🤖</div>
+          <div><div class="card-label">Edge</div><div class="card-val">AI-Accelerated Delivery</div></div>
+        </div>
+        <div class="skill-pills">
+          <span class="pill">Laravel</span><span class="pill">WordPress</span>
+          <span class="pill">Shopify</span><span class="pill">Google Ads</span>
+          <span class="pill">FB Ads</span><span class="pill">SEO</span>
+          <span class="pill">TikTok Ads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="hero-visual">
+      <div class="about-avatar">WA</div>
+    </div>
+    <div>
+      <div class="sec-head">
+        <p class="sec-label">About Me</p>
+        <h2 class="sec-title">Developer by craft.<br>Marketer by strategy.</h2>
+      </div>
+      <p style="color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem;">
+        I'm <strong style="color:var(--navy)">Syed Waleed Ali</strong>, a Full-Stack Web Developer and Digital Marketing Specialist based in Karachi, Pakistan. With 3+ years in web development and 4+ years running paid media campaigns, I offer a rare combination: I can build your digital product <em>and</em> market it effectively.
+      </p>
+      <p style="color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1.5rem;">
+        I work with Laravel, WordPress, and Shopify to build fast, scalable web applications, and I run Google Ads, Facebook Ads, and TikTok campaigns that deliver measurable ROI. I also leverage AI tools to ship faster and smarter.
+      </p>
+      <div class="about-tags">
+        <span class="tag">🎯 Results-Driven</span>
+        <span class="tag">⚡ Fast Delivery</span>
+        <span class="tag">🤖 AI-Powered</span>
+        <span class="tag">🌐 Remote-Ready</span>
+        <span class="tag">📈 Growth-Focused</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-head fade-in">
+    <p class="sec-label">Expertise</p>
+    <h2 class="sec-title">What I Bring to the Table</h2>
+    <p class="sec-desc">A full-stack toolkit — from back-end architecture to paid media campaigns.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-icon">⚙️</div>
+      <h3>Back-End Development</h3>
+      <ul class="skill-list">
+        <li>Laravel (PHP)</li>
+        <li>REST API Development</li>
+        <li>MySQL / Database Design</li>
+        <li>Payment Gateway Integration</li>
+      </ul>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🖥️</div>
+      <h3>Front-End Development</h3>
+      <ul class="skill-list">
+        <li>HTML5 / CSS3</li>
+        <li>JavaScript (ES6+)</li>
+        <li>Responsive Design</li>
+        <li>Performance Optimization</li>
+      </ul>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🛒</div>
+      <h3>CMS & E-Commerce</h3>
+      <ul class="skill-list">
+        <li>WordPress / WooCommerce</li>
+        <li>Shopify (Theme Dev)</li>
+        <li>Custom Plugin/Theme Build</li>
+        <li>Store Optimization</li>
+      </ul>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">📣</div>
+      <h3>Paid Advertising</h3>
+      <ul class="skill-list">
+        <li>Google Ads (Search / Display)</li>
+        <li>Facebook & Instagram Ads</li>
+        <li>TikTok Ads</li>
+        <li>Campaign Optimization & ROAS</li>
+      </ul>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🔍</div>
+      <h3>SEO & Content</h3>
+      <ul class="skill-list">
+        <li>On-Page SEO Audits</li>
+        <li>Keyword Research</li>
+        <li>Technical SEO</li>
+        <li>Ranking Improvement</li>
+      </ul>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🤖</div>
+      <h3>AI & Productivity</h3>
+      <ul class="skill-list">
+        <li>ChatGPT / Copilot</li>
+        <li>AI-Accelerated Dev</li>
+        <li>Midjourney / Jasper</li>
+        <li>Workflow Automation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-head fade-in">
+    <p class="sec-label">Portfolio</p>
+    <h2 class="sec-title">Projects That Delivered Results</h2>
+    <p class="sec-desc">Every project is built for performance — not just aesthetics.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-num">Project 01</div>
+      <h3>Custom Shopify Fashion Store</h3>
+      <p>Built a fully customized Shopify store for a fashion brand — custom Liquid theme, upsell flows, mobile-first UX, and integrated Facebook Ads campaign.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Shopify</span><span class="stack-tag">Liquid</span>
+        <span class="stack-tag">CSS</span><span class="stack-tag">Facebook Ads</span>
+      </div>
+      <div class="project-result">📈 PKR 500K+ in sales within 2 months of launch</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">Project 02</div>
+      <h3>Laravel CRM & Invoicing System</h3>
+      <p>Developed a complete business management system with CRM, invoicing, and automated billing workflows for a local services company.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Laravel</span><span class="stack-tag">MySQL</span>
+        <span class="stack-tag">REST API</span><span class="stack-tag">Blade</span>
+      </div>
+      <div class="project-result">⚡ Reduced manual admin work by 60%</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">Project 03</div>
+      <h3>Real Estate SEO + Google Ads</h3>
+      <p>3-month SEO and PPC campaign for a real estate client. Combined on-page SEO, content strategy, and targeted Google Ads to dominate local search.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Google Ads</span><span class="stack-tag">SEMrush</span>
+        <span class="stack-tag">WordPress</span><span class="stack-tag">On-Page SEO</span>
+      </div>
+      <div class="project-result">🥇 Top-3 Google ranking for 8 target keywords</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">Project 04</div>
+      <h3>E-Commerce TikTok Campaign</h3>
+      <p>Planned and executed TikTok Ads campaigns for a local e-commerce brand targeting Gen-Z buyers. Creative-first strategy with rapid A/B testing.</p>
+      <div class="project-stack">
+        <span class="stack-tag">TikTok Ads</span><span class="stack-tag">Creative Strategy</span>
+        <span class="stack-tag">A/B Testing</span>
+      </div>
+      <div class="project-result">🎯 20K+ impressions & 500+ conversions per campaign</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">Project 05</div>
+      <h3>WordPress Multi-Vendor Marketplace</h3>
+      <p>Built a WooCommerce-powered multi-vendor marketplace with custom vendor dashboards, commission system, and payment gateway integration.</p>
+      <div class="project-stack">
+        <span class="stack-tag">WordPress</span><span class="stack-tag">WooCommerce</span>
+        <span class="stack-tag">PHP</span><span class="stack-tag">Custom Plugins</span>
+      </div>
+      <div class="project-result">🛒 Live marketplace with multi-vendor support</div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-num">Project 06</div>
+      <h3>Service Booking Platform</h3>
+      <p>Designed and developed a full service booking web app with appointment scheduling, user auth, admin panel, and automated email notifications.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Laravel</span><span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">MySQL</span><span class="stack-tag">SMTP</span>
+      </div>
+      <div class="project-result">✅ Fully functional, deployed & client-approved</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-head fade-in">
+    <p class="sec-label">Get In Touch</p>
+    <h2 class="sec-title">Ready to Work Together?</h2>
+    <p class="sec-desc">Whether you need a website built, a store launched, or ad campaigns managed — let's talk.</p>
+  </div>
+  <div class="contact-grid fade-in">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="c-icon">📧</div>
+        <div><div class="c-label">Email</div><div class="c-val">syedwaleedali123@gmail.com</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">📱</div>
+        <div><div class="c-label">Phone / WhatsApp</div><div class="c-val">+92 318 2764418</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">📍</div>
+        <div><div class="c-label">Location</div><div class="c-val">Karachi, Pakistan — Remote Worldwide</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">⏰</div>
+        <div><div class="c-label">Availability</div><div class="c-val">Open for Freelance & Full-Time Roles</div></div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <input type="text" placeholder="Project Type (e.g. Shopify Store, Google Ads)"/>
+      <textarea placeholder="Tell me about your project..."></textarea>
+      <button type="submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; Built by <strong>Syed Waleed Ali</strong> · Full-Stack Developer &amp; Digital Marketer · Karachi, Pakistan</p>
+  <p style="margin-top:.4rem;font-size:.75rem;opacity:.6;">© 2025 All rights reserved</p>
+</footer>
+
+<div class="toast" id="toast">✅ Message sent! I'll get back to you within 24 hours.</div>
+
+<script>
+  // Fade in on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+    e.target.reset();
+  }
+</script>
+</body>
+</html>
